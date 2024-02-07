@@ -131,12 +131,11 @@ class AddressBook(UserDict):
                 return super().__delitem__(key)
 
     def iterator(self,max_number):
-        """Generator for finding N number of contacts"""
-        count = 0
-        for key in self.data:
-            if count >= max_number:
-                break
-            yield self.find(key)
-            count += 1
+        start = 0 
+        stop = max_number
+        while start < len(self.data):
+            yield list(self.data.items())[start:stop]
+            start += max_number
+            stop += max_number
 
 #The file ends
