@@ -140,34 +140,3 @@ class AddressBook(UserDict):
             count += 1
 
 #The file ends
-
-
-book = AddressBook()
-
-ihor = Record("Ihor","8-02-1998")
-ihor.add_phone("1111111111")
-ihor.add_phone("2222222222")
-
-Oleg = Record("Oleg","13-02-1998")
-Oleg.add_phone("3333333333")
-Oleg.add_phone("4444444444")
-
-Ivan = Record("Ivan","12-02-1998")
-Ivan.add_phone("5555555555")
-Ivan.add_phone("6666666666")
-Ivan.add_phone("7777777777")
-
-Max = Record("Max","13-02-1998")
-Max.add_phone("8888888888")
-Max.add_phone("9999999999")
-
-ihor.days_to_birthday()
-
-book.add_record(ihor)
-book.add_record(Oleg)
-book.add_record(Ivan)
-book.add_record(Max)
-
-iter = book.iterator(5)
-for k in iter:
-    print(f"{k}")
