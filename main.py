@@ -58,7 +58,7 @@ class Record:
 
         self.name = Name(name)
         self.phones = []
-        self.birthday = Birthday(birthday)
+        self.birthday = Birthday(birthday) if birthday else None
 
     def add_phone(self,value):
         """function for adding phones"""
