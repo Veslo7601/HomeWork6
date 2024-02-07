@@ -28,9 +28,9 @@ class Phone(Field):
     def value(self, value):
         """Setter"""
         if len(str(value)) != 10:
-            raise ValueError ("Номер не має 10 цифр")
+            raise ValueError ("The number does not have 10 digits")
         elif not value.isdigit():
-            raise ValueError ("У номері є зайві символи ")
+            raise ValueError ("There are extra characters in the number")
         else:
             self.__value = value
 
@@ -45,11 +45,11 @@ class Birthday(Field):
     @valid_birthday.setter
     def valid_birthday(self,value):
         """Setter"""
-        correct = datetime.strptime(value, '%d-%m-%Y')
+        correct = datetime.strptime(value, '%d.%m.%Y')
         if correct:
             self.__value = correct
         else:
-            raise ValueError ("Дата не коректна")
+            raise ValueError ("The date is incorrect")
 
 class Record:
     """Class representing a Record"""
@@ -93,7 +93,7 @@ class Record:
     def days_to_birthday(self):
         """Function to find birthday"""
         current_date = datetime.now().date()
-        day, month, year = str(self.birthday).split("-")
+        day, month, year = str(self.birthday).split(".")
         if int(month) >= current_date.month:
             birthday = datetime(year=current_date.year, month=int(month), day=int(day)).date()
         else:
@@ -102,11 +102,11 @@ class Record:
         days = birthday - current_date
 
         if days.days < 0:
-            return print("Birthday passed")
+            return "Birthday passed"
         elif days.days == 0:
-            return print("Birthday today")
+            return "Birthday today"
         else:
-            return print(f"There are {days.days} days left until the birthday")
+            return f"There are {days.days} days left until the birthday"
 
 class AddressBook(UserDict):
     """Class representing a AddressBook"""
@@ -139,3 +139,38 @@ class AddressBook(UserDict):
             stop += max_number
 
 #The file ends
+
+book = AddressBook()
+
+ihor = Record("Ihor","08.02.1998")
+ihor.add_phone("0000000000")
+print(ihor.days_to_birthday())
+
+oleg = Record("oleg",)
+oleg.add_phone("1111111111")
+
+ivan = Record("ivan")
+ivan.add_phone("2222222222")
+
+max = Record("max")
+max.add_phone("3333333333")
+
+maxff = Record("maxff")
+maxff.add_phone("4444444444")
+
+maxdd = Record("maxdd")
+maxdd.add_phone("5555555555")
+
+
+book.add_record(ihor)
+book.add_record(oleg)
+book.add_record(ivan)
+book.add_record(max)
+book.add_record(maxff)
+book.add_record(maxdd)
+
+iter = book.iterator(2)
+print(iter)
+
+for i in iter:
+    print(i)
